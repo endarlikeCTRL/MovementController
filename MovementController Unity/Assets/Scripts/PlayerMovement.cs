@@ -10,14 +10,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform orientation;
 
     [Header("Movement")]
-    public float moveSpeed = 6f;
-    [SerializeField] float airMultiplier = 0.4f;
+    public float moveSpeed = 5f;
+    [SerializeField] float airMultiplier = 0.35f;
     float movementMultiplier = 10f;
 
     [Header("Sprinting")]
-    [SerializeField] float walkSpeed = 4f;
-    [SerializeField] float sprintSpeed = 6f;
+    [SerializeField] float walkSpeed = 5f;
+    [SerializeField] float sprintSpeed = 10f;
     [SerializeField] float acceleration = 10f;
+    [SerializeField] float crouchSpeed = 0.45f;
 
     [Header("Jumping")]
     public float jumpForce = 5f;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftControl;
+    [SerializeField] KeyCode crouchKey = KeyCode.LeftShift;
 
     [Header("Drag")]
     [SerializeField] float groundDrag = 6f;
@@ -81,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         ControlDrag();
         ControlSpeed();
+        ControlCrouch();
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
@@ -105,6 +108,20 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void ControlCrouch()
+    {
+
+        if (Input.GetKey(crouchKey) && isGrounded)
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, crouchSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+        }
+
     }
 
     void ControlSpeed()
