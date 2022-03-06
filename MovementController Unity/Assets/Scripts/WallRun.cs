@@ -18,9 +18,12 @@ public class WallRun : MonoBehaviour
 
     bool wallLeft = false;
     bool wallRight = false;
+    bool wallFront = false;
+    bool wallBack = false;
 
     RaycastHit leftWallHit;
     RaycastHit rightWallHit;
+    RaycastHit frontWallHit;
 
     private Rigidbody rb;
 
@@ -39,6 +42,7 @@ public class WallRun : MonoBehaviour
 
         wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance);
         wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallDistance);
+        wallFront = Physics.Raycast(transform.position, orientation.forward, out frontWallHit, wallDistance);
 
     }
 
@@ -58,6 +62,11 @@ public class WallRun : MonoBehaviour
             {
                 StartWallRun();
                 Debug.Log("wall running on the Right");
+            }
+            else if (wallFront)
+            {
+                StartWallRun();
+                Debug.Log("wall running on the front");
             }
             else
             {
