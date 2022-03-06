@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float sprintfov;
     [SerializeField] private float zoomfovTime;
     [SerializeField] private float zoomfov;
+    [SerializeField] private float jumpfovTime;
+    [SerializeField] private float jumpfov;
 
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 5f;
@@ -31,7 +33,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float crouchSpeed = 0.45f;
 
     [Header("Jumping")]
+    /*[SerializeField] private float doubleJumpMultiplier = 0.5f;*/
     public float jumpForce = 5f;
+    private bool canDoubleJump = false;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
@@ -99,7 +103,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
+            canDoubleJump = true;
             Jump();
+        }
+        else
+        {
+            if(Input.GetKeyDown(jumpKey) && canDoubleJump)
+            {
+                Jump();
+                canDoubleJump = false;
+            }
         }
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
