@@ -37,6 +37,13 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 5f;
     private bool canDoubleJump = false;
 
+/*    [Header("Slide")]
+    [SerializeField] public float slideSpeed = 7f;
+    float originalHeight;
+    public float reducedHeight;
+    bool isSliding;*/
+
+
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftControl;
@@ -61,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 slopeMoveDirection;
 
     Rigidbody rb;
+ /*   CapsuleCollider collider;*/
 
     RaycastHit slopeHit;
 
@@ -85,8 +93,10 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
 
+/*        collider = GetComponent<CapsuleCollider>();*/
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+/*        originalHeight = collider.height;*/
 
     }
 
@@ -100,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         ControlSpeed();
         ControlCrouch();
         ControlZoom();
+/*        ControlSlide();*/
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
@@ -118,6 +129,27 @@ public class PlayerMovement : MonoBehaviour
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
 
     }
+
+/*    void ControlSlide()
+    {
+
+        if (Input.GetKey(crouchKey) && isGrounded && Input.GetKey(KeyCode.W))
+            Sliding();
+        else if (Input.GetKeyUp(crouchKey))
+            GoUp();
+
+    }
+
+    private void Sliding()
+    {
+        collider.height = reducedHeight;
+        rb.AddForce(transform.forward * slideSpeed, ForceMode.VelocityChange);
+    }
+
+    private void GoUp()
+    {
+        collider.height = originalHeight;
+    }*/
 
     void MyInput()
     {
