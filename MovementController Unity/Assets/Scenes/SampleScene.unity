@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 152848354}
   - component: {fileID: 152848353}
   - component: {fileID: 152848352}
+  - component: {fileID: 152848355}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -218,6 +219,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152848350}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &152848355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152848350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 0d3e8bf06ace65a41a76b65e2d1048b9, type: 2}
 --- !u!1 &360581863
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +712,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 107d3b221f21f194893b1dd10cb06651, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2001,6 +2019,7 @@ GameObject:
   - component: {fileID: 1928104487}
   - component: {fileID: 1928104486}
   - component: {fileID: 1928104485}
+  - component: {fileID: 1928104488}
   m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -2084,6 +2103,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928104483}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1928104488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928104483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 60c539efaebc5394fb9f48cf0d7e6985, type: 2}
 --- !u!1 &2032926315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,8 +2159,8 @@ MonoBehaviour:
   fov: 90
   crouchfovTime: 10
   crouchfov: 85
-  sprintfovTime: 20
-  sprintfov: 110
+  sprintfovTime: 35
+  sprintfov: 100
   zoomfovTime: 30
   zoomfov: 15
   walkSpeed: 4
@@ -2212,7 +2248,7 @@ MonoBehaviour:
   wallRunJumpForce: 6
   cam: {fileID: 943288424}
   fov: 90
-  wallRunfovTime: 20
-  wallRunfov: 120
+  wallRunfovTime: 35
+  wallRunfov: 110
   camTilt: 20
   camTiltTime: 20
