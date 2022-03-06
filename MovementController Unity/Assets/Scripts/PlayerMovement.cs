@@ -14,6 +14,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float airMultiplier = 0.35f;
     float movementMultiplier = 10f;
 
+    [Header("Camera")]
+    [SerializeField] private Camera cam;
+    [SerializeField] private float fov;
+    [SerializeField] private float crouchfovTime;
+    [SerializeField] private float crouchfov;
+    [SerializeField] private float sprintfovTime;
+    [SerializeField] private float sprintfov;
+    [SerializeField] private float zoomfovTime;
+    [SerializeField] private float zoomfov;
+
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 5f;
     [SerializeField] float sprintSpeed = 10f;
@@ -27,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftControl;
     [SerializeField] KeyCode crouchKey = KeyCode.LeftShift;
+    [SerializeField] KeyCode zoomKey = KeyCode.C;
 
     [Header("Drag")]
     [SerializeField] float groundDrag = 6f;
@@ -84,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
         ControlDrag();
         ControlSpeed();
         ControlCrouch();
+        ControlZoom();
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
@@ -116,10 +128,26 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(crouchKey) && isGrounded)
         {
             moveSpeed = Mathf.Lerp(moveSpeed, crouchSpeed, acceleration * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, crouchfov, crouchfovTime * Time.deltaTime);
         }
         else
         {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, crouchfovTime * Time.deltaTime);
+        }
+
+    }
+
+    void ControlZoom()
+    {
+
+        if (Input.GetKey(zoomKey))
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomfov, zoomfovTime * Time.deltaTime);
+        }
+        else
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, zoomfovTime * Time.deltaTime);
         }
 
     }
@@ -130,10 +158,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(sprintKey) && isGrounded)
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintfov, sprintfovTime * Time.deltaTime);
         }
         else
         {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintfovTime * Time.deltaTime);
         }
 
     }

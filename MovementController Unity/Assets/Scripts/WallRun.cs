@@ -16,6 +16,16 @@ public class WallRun : MonoBehaviour
     [SerializeField] private float wallRunGRavity;
     [SerializeField] private float wallRunJumpForce;
 
+    [Header("Camera")]
+    [SerializeField] private Camera cam;
+    [SerializeField] private float fov;
+    [SerializeField] private float wallRunfovTime;
+    [SerializeField] private float wallRunfov;
+    [SerializeField] private float camTilt;
+    [SerializeField] private float camTiltTime;
+
+    public float tilt { get; private set; }
+
     bool wallLeft = false;
     bool wallRight = false;
     bool wallFront = false;
@@ -24,6 +34,7 @@ public class WallRun : MonoBehaviour
     RaycastHit leftWallHit;
     RaycastHit rightWallHit;
     RaycastHit frontWallHit;
+    RaycastHit backWallHit;
 
     private Rigidbody rb;
 
@@ -43,6 +54,7 @@ public class WallRun : MonoBehaviour
         wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance);
         wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallDistance);
         wallFront = Physics.Raycast(transform.position, orientation.forward, out frontWallHit, wallDistance);
+        wallBack = Physics.Raycast(transform.position, -orientation.forward, out backWallHit, wallDistance);
 
     }
 
@@ -66,7 +78,12 @@ public class WallRun : MonoBehaviour
             else if (wallFront)
             {
                 StartWallRun();
-                Debug.Log("wall running on the front");
+                Debug.Log("wall running on the Front");
+            }
+            else if (wallBack)
+            {
+                StartWallRun();
+                Debug.Log("wall running on the Back");
             }
             else
             {
@@ -86,6 +103,8 @@ public class WallRun : MonoBehaviour
         rb.useGravity = false;
 
         rb.AddForce(Vector3.down * wallRunGRavity, ForceMode.Force);
+
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunfov, wallRunfovTime * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -108,6 +127,8 @@ public class WallRun : MonoBehaviour
     void StopWallRun()
     {
         rb.useGravity = true;
+
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, wallRunfovTime * Time.deltaTime);
     }
 
 }
