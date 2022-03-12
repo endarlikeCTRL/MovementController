@@ -10,7 +10,7 @@ public class MoveCamera : MonoBehaviour
     [Header("Keybinds")]
     [SerializeField] KeyCode crouchKey = KeyCode.LeftShift;
 
-    private float crouchDistance = 0.5f;
+    private float crouchDistance = 0.25f;
 
     void Update()
     {
