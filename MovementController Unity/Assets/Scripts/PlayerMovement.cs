@@ -1,4 +1,4 @@
-jjjjjjjjjjjddddddddusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -102,6 +102,15 @@ public class PlayerMovement : MonoBehaviour
         ControlSpeed();
         ControlCrouch();
         ControlZoom();
+
+        if (Input.GetKey(sprintKey) && !isGrounded)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintfov, sprintfovTime * Time.deltaTime);
+        }
+        else
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintfovTime * Time.deltaTime);
+        }
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
