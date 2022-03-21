@@ -29,8 +29,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpfov;
 
     [Header("Sprinting")]
-    [SerializeField] float walkSpeed = 5f;
-    [SerializeField] float sprintSpeed = 10f;
+    [SerializeField] float walkSpeed = 4f;
+    [SerializeField] float sprintSpeed = 11f;
     [SerializeField] float acceleration = 10f;
     [SerializeField] float crouchSpeed = 0.45f;
 
@@ -46,8 +46,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] KeyCode zoomKey = KeyCode.C;
 
     [Header("Drag")]
-    [SerializeField] float groundDrag = 6f;
-    [SerializeField] float airDrag = 2f;
+    [SerializeField] float groundDrag = 7f;
+    [SerializeField] float airDrag = 3f;
 
 
     float horizontalMovement;
